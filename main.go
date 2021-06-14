@@ -68,7 +68,7 @@ func getPosts(ctx context.Context, httpClient *http.Client) (string, error) {
 
 	defer response.Body.Close()
 
-	if response.StatusCode != http.StatusOK {
+	if response.StatusCode != http.StatusOK && response.StatusCode != http.StatusNotModified {
 		bytes, err := ioutil.ReadAll(response.Body)
 		if err != nil {
 			return "", err
@@ -101,7 +101,7 @@ func getPost(ctx context.Context, httpClient *http.Client, id string) (*Post, er
 
 	defer response.Body.Close()
 
-	if response.StatusCode != http.StatusOK {
+	if response.StatusCode != http.StatusOK && response.StatusCode != http.StatusNotModified {
 		bytes, err := ioutil.ReadAll(response.Body)
 		if err != nil {
 			return nil, err
